@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+{% block title %} Add User {% endblock title %}
+{% block content %}
+    <div class="container" style="height: 100vh;">
+        <div class="row" style="height: 100%;"> 
+            <div class="col-10 col-md-8 col-lg-6 mx-auto my-auto shadow p-4"> 
+                <h1>Add New User</h1>
+                <form action="">
+                    <div class="mb-3">
+                        <label for="firstname" class="form-label">First Name</label>
+                        <input class="form-control" type="text" name="firstname" id="firstname" placeholder="Your First Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">Last Name</label>
+                        <input class="form-control" type="text" name="lastname" id="lastname" placeholder="Your Last Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input class="form-control" type="email" name="email" id="email" placeholder="e.g example@mail.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input class="form-control" type="text" name="username" id="username" placeholder="Your Preferred Username">
+                    </div>
+                    <div class="mb-3">
+                        <p>Password</p>
+                        <input class="form-control mb-3" type="text" name="password1" placeholder="New Password">
+                        <input class="form-control" type="text" name="password2" placeholder="Confirm Password">
+                    </div>
+                    <div class="mb-3">
+                        <input type="submit" class="btn btn-primary" value="Add">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
