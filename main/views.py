@@ -70,13 +70,24 @@ def addUser(request):
     )
 
     if status == 'admin':
-        user.is_staff == True
-        user.save()
+        user.is_staff = True
     elif status == 'superuser':
-        user.is_superuser == True
-        user.is_staff == True
-        user.save()
-
+        user.is_superuser = True
+        user.is_staff = True
+    
+    user.save()
     messages.success(request, 'User added successfully!')
-
     return HttpResponseRedirect(reverse('userlist'))
+
+def editUserForm(request, id):
+    user = User.objects.get(id=id)
+    data = dict(
+        username = user.username,
+        firstname = user.first_name,
+        lastname = user.last_name,
+        email = user.email,
+        is_staff = user.is_staff,
+        is_superuser = user.is_superuser,
+        is_active = user.is_active
+    )
+    return render(request, 'main/edit_user_form.html')

@@ -1,0 +1,57 @@
+{% extends 'main/base.html' %}
+{% block title %} Edit User {% endblock title %}
+{% block content %}
+    <div class="container" style="height: 100vh;">
+        <div class="row" style="height: 100%;"> 
+            <div class="col-10 col-md-8 col-lg-6 mx-auto my-auto shadow p-4"> 
+                <h1>Add New User</h1>
+                <form action="{% url 'add-user' %}" method="POST">
+                    {% csrf_token %}
+                    {% for message in messages %}
+                        <div class="mb-3 alert {{message.tags}}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <div class="mb-3">
+                        <label for="firstname" class="form-label">First Name</label>
+                        <input value="firstname" class="form-control" type="text" name="firstname" id="firstname" placeholder="Your First Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">Last Name</label>
+                        <input value="lastname" class="form-control" type="text" name="lastname" id="lastname" placeholder="Your Last Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input value="email" class="form-control" type="email" name="email" id="email" placeholder="e.g example@mail.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input value="username" class="form-control" type="text" name="username" id="username" placeholder="Your Preferred Username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">User Status</label>
+                        <select class="form-select" aria-label="Default select example" name="status" id="status" required>
+                            <option value="user">
+                                User
+                            </option>
+                            <option {% if is_staff %} selected {% endif %} value="admin">
+                                Admin
+                            </option>
+                            <option {% if is_superuser %} selected {% endif %}value="superuser">
+                                Superuser
+                            </option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <p>Password</p>
+                        <input class="form-control mb-3" type="password" name="password1" placeholder="New Password" required>
+                        <input class="form-control" type="password" name="password2" placeholder="Confirm Password" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="submit" class="btn btn-primary" value="Add">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
