@@ -9,6 +9,12 @@
                         User List
                     </h2>
 
+                    {% for message in messages %}
+                        <div class="mb-3 alert {{message.tags}}" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
                     <a class="btn btn-secondary" href="{% url 'todo-home' %}">
                         <i class="bi bi-list-check"></i>
                     </a>

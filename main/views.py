@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from .models import Todo
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.contrib import messages
 
 # Create your views here.
 
@@ -52,3 +53,30 @@ def userlist(request):
 
 def addUserForm(request):
     return render(request, 'main/add_user_form.html')
+
+def addUser(request):
+    if request.POST['password1'] != request.POST['password2']:
+        messages.error(request, 'Password does not match!')
+        return HttpResponseRedirect(reverse('add-user-form'))
+
+    status = request.POST['status']
+
+    user = User.objects.create_user(
+        first_name = request.POST['firstname'],
+        last_name = request.POST['lastname'],
+        username = request.POST['username'],
+        email = request.POST['email'],
+        password = request.POST['password1']
+    )
+
+    if status == 'admin':
+        user.is_staff == True
+        user.save()
+    elif status == 'superuser':
+        user.is_superuser == True
+        user.is_staff == True
+        user.save()
+
+    messages.success(request, 'User added successfully!')
+
+    return HttpResponseRedirect(reverse('userlist'))
